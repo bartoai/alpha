@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlphaCoin</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.3) 50%, #000 100%);
+            transform: rotateX(75deg) translateZ(-200px);
+            transform-origin: bottom;
+        }
+
+        .black-hole {
+            position: absolute;
+            bottom: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(
+                ellipse at center,
+                #000 0%,
+                #000 20%,
+                rgba(0, 0, 0, 0.9) 30%,
+                rgba(0, 255, 127, 0.1) 60%,
+                rgba(0, 255, 127, 0.3) 80%,
+                rgba(0, 255, 127, 0.1) 100%
+            );
+            animation: blackHolePulse 3s ease-in-out infinite;
+            filter: blur(1px);
+        }
+
+        .event-horizon {
+            position: absolute;
+            bottom: -15%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 130px;
+            border-radius: 50%;
+            background: radial-gradient(
+                ellipse at center,
+                #000 0%,
+                #000 60%,
+                rgba(0, 0, 0, 0.8) 80%,
+                transparent 100%
+            );
+            animation: eventHorizonSpin 8s linear infinite;
+        }
+
+        .light-beam {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(
+                to top,
+                rgba(0, 255, 127, 0.8) 0%,
+                rgba(0, 255, 127, 0.4) 30%,
+                rgba(0, 255, 127, 0.1) 60%,
+                transparent 100%
+            );
+            animation: lightBeam 2s ease-in-out infinite alternate;
+            filter: blur(1px);
+        }
+
+        .light-beam:nth-child(2) {
+            width: 4px;
+            animation-delay: -0.5s;
+            opacity: 0.7;
+        }
+
+        .light-beam:nth-child(3) {
+            width: 1px;
+            animation-delay: -1s;
+            margin-left: 20px;
+        }
+
+        .light-beam:nth-child(4) {
+            width: 1px;
+            animation-delay: -1.5s;
+            margin-left: -20px;
+        }
+
+        .ambient-glow {
+            position: absolute;
+            bottom: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 500px;
+            background: radial-gradient(
+                ellipse at center bottom,
+                rgba(0, 255, 127, 0.2) 0%,
+                rgba(0, 255, 127, 0.1) 40%,
+                rgba(0, 255, 127, 0.05) 60%,
+                transparent 100%
+            );
+            animation: ambientGlow 4s ease-in-out infinite;
+        }
+
+        .main-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            margin-top: -20vh;
+        }
+
+        .main-text {
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 300;
+            color: #00ff7f;
+            text-shadow: 
+                0 0 10px rgba(0, 255, 127, 0.8),
+                0 0 20px rgba(0, 255, 127, 0.6),
+                0 0 30px rgba(0, 255, 127, 0.4),
+                0 0 40px rgba(0, 255, 127, 0.2);
+            margin-bottom: 3rem;
+            font-style: italic;
+            letter-spacing: 2px;
+            animation: textFloat 3s ease-in-out infinite alternate;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 2rem;
+        }
+
+        .alpha-symbol {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #00ff7f, #00cc66);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #000;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 127, 0.6),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            animation: alphaPulse 2s ease-in-out infinite;
+        }
+
+        .brand-name {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .energy-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #00ff7f;
+            border-radius: 50%;
+            animation: energyFloat 8s infinite linear;
+            opacity: 0.8;
+            box-shadow: 0 0 6px rgba(0, 255, 127, 0.8);
+        }
+
+        .gravitational-waves {
+            position: absolute;
+            bottom: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 60px;
+            border: 2px solid rgba(0, 255, 127, 0.3);
+            border-radius: 50%;
+            animation: waveExpansion 4s ease-out infinite;
+        }
+
+        .gravitational-waves:nth-child(2) {
+            animation-delay: -1s;
+            border-color: rgba(0, 255, 127, 0.2);
+        }
+
+        .gravitational-waves:nth-child(3) {
+            animation-delay: -2s;
+            border-color: rgba(0, 255, 127, 0.1);
+        }
+
+        @keyframes blackHolePulse {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateX(-50%) scale(1.05);
+                opacity: 1;
+            }
+        }
+
+        @keyframes eventHorizonSpin {
+            0% {
+                transform: translateX(-50%) rotate(0deg);
+            }
+            100% {
+                transform: translateX(-50%) rotate(360deg);
+            }
+        }
+
+        @keyframes lightBeam {
+            0% {
+                opacity: 0.3;
+                transform: translateX(-50%) scaleY(0.8);
+            }
+            100% {
+                opacity: 0.8;
+                transform: translateX(-50%) scaleY(1.2);
+            }
+        }
+
+        @keyframes ambientGlow {
+            0%, 100% {
+                opacity: 0.6;
+                transform: translateX(-50%) scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.1);
+            }
+        }
+
+        @keyframes textFloat {
+            0% {
+                transform: translateY(0px);
+                text-shadow: 
+                    0 0 10px rgba(0, 255, 127, 0.8),
+                    0 0 20px rgba(0, 255, 127, 0.6),
+                    0 0 30px rgba(0, 255, 127, 0.4);
+            }
+            100% {
+                transform: translateY(-10px);
+                text-shadow: 
+                    0 0 20px rgba(0, 255, 127, 1),
+                    0 0 30px rgba(0, 255, 127, 0.8),
+                    0 0 40px rgba(0, 255, 127, 0.6),
+                    0 0 50px rgba(0, 255, 127, 0.4);
+            }
+        }
+
+        @keyframes alphaPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 
+                    0 0 20px rgba(0, 255, 127, 0.6),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 
+                    0 0 30px rgba(0, 255, 127, 0.8),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+            }
+        }
+
+        @keyframes energyFloat {
+            0% {
+                transform: translateY(100vh) translateX(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes waveExpansion {
+            0% {
+                transform: translateX(-50%) scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateX(-50%) scale(8);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-text {
+                font-size: clamp(1.8rem, 6vw, 3rem);
+                margin-bottom: 2rem;
+            }
+            
+            .alpha-symbol {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+            
+            .brand-name {
+                font-size: 1.5rem;
+            }
+
+            .black-hole {
+                width: 400px;
+                height: 250px;
+            }
+
+            .event-horizon {
+                width: 120px;
+                height: 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ground"></div>
+    <div class="ambient-glow"></div>
+    <div class="black-hole"></div>
+    <div class="event-horizon"></div>
+    
+    <div class="gravitational-waves"></div>
+    <div class="gravitational-waves"></div>
+    <div class="gravitational-waves"></div>
+    
+    <div class="light-beam"></div>
+    <div class="light-beam"></div>
+    <div class="light-beam"></div>
+    <div class="light-beam"></div>
+    
+    <div class="particles" id="particles"></div>
+    
+    <div class="main-content">
+        <h1 class="main-text">this coin is alpha</h1>
+        <div class="logo-container">
+            <div class="alpha-symbol">α</div>
+            <div class="brand-name">AlphaCoin</div>
+        </div>
+    </div>
+
+    <script>
+        // Create energy particles emanating from black hole
+        function createEnergyParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'energy-particle';
+            
+            // Start from black hole area
+            const startX = 45 + Math.random() * 10; // Around black hole
+            particle.style.left = startX + '%';
+            particle.style.bottom = '0%';
+            
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (Math.random() * 5 + 6) + 's';
+            
+            // Random drift direction
+            const drift = (Math.random() - 0.5) * 200;
+            particle.style.setProperty('--drift', drift + 'px');
+            
+            document.getElementById('particles').appendChild(particle);
+            
+            // Remove particle after animation
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 15000);
+        }
+
+        // Create particles periodically
+        setInterval(createEnergyParticle, 200);
+        
+        // Create initial particles
+        for (let i = 0; i < 30; i++) {
+            setTimeout(createEnergyParticle, i * 100);
+        }
+
+        // Add some randomness to light beams
+        const lightBeams = document.querySelectorAll('.light-beam');
+        lightBeams.forEach((beam, index) => {
+            beam.style.animationDelay = (index * 0.3) + 's';
+        });
+    </script>
+</body>
+</html>
