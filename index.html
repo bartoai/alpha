@@ -26,6 +26,7 @@
             background: #000;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow: hidden;
@@ -58,21 +59,44 @@
             position: relative;
         }
 
-        .main-text {
+        .tagline {
             font-size: clamp(2.5rem, 8vw, 6rem);
-            font-family: 'TRYVesterbro', 'Arial', sans-serif;
             font-weight: 500;
             font-style: italic;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
+            line-height: 1.2;
+        }
+
+        .dim-text {
+            color: #00ff7f;
+            opacity: 0.4;
+            text-shadow: none;
+        }
+
+        .glow-text {
             color: #00ff7f;
             text-shadow: 
-                0 0 10px rgba(0, 255, 127, 0.8),
-                0 0 20px rgba(0, 255, 127, 0.6),
-                0 0 30px rgba(0, 255, 127, 0.4),
-                0 0 40px rgba(0, 255, 127, 0.2);
+                0 0 20px rgba(0, 255, 127, 1),
+                0 0 40px rgba(0, 255, 127, 1),
+                0 0 60px rgba(0, 255, 127, 1),
+                0 0 80px rgba(0, 255, 127, 0.9),
+                0 0 120px rgba(0, 255, 127, 0.8),
+                0 0 160px rgba(0, 255, 127, 0.6);
+            animation: alphaGlow 2.5s ease-in-out infinite alternate;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 3rem;
-            font-style: italic;
-            letter-spacing: 2px;
-            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        .logo-image {
+            height: 60px;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 127, 0.6));
+            animation: logoGlow 2s ease-in-out infinite alternate;
         }
 
         .social-links {
@@ -80,7 +104,6 @@
             justify-content: center;
             align-items: center;
             gap: 30px;
-            margin-top: 3rem;
         }
 
         .social-icon {
@@ -116,6 +139,55 @@
             transform: scale(1.1);
         }
 
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 5;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #00ff7f;
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            opacity: 0.7;
+            box-shadow: 0 0 4px rgba(0, 255, 127, 0.8);
+        }
+
+        @keyframes alphaGlow {
+            0% {
+                text-shadow: 
+                    0 0 20px rgba(0, 255, 127, 1),
+                    0 0 40px rgba(0, 255, 127, 1),
+                    0 0 60px rgba(0, 255, 127, 1),
+                    0 0 80px rgba(0, 255, 127, 0.9),
+                    0 0 120px rgba(0, 255, 127, 0.8),
+                    0 0 160px rgba(0, 255, 127, 0.6);
+            }
+            100% {
+                text-shadow: 
+                    0 0 30px rgba(0, 255, 127, 1),
+                    0 0 60px rgba(0, 255, 127, 1),
+                    0 0 90px rgba(0, 255, 127, 1),
+                    0 0 120px rgba(0, 255, 127, 1),
+                    0 0 180px rgba(0, 255, 127, 0.9),
+                    0 0 240px rgba(0, 255, 127, 0.7);
+            }
+        }
+
+        @keyframes logoGlow {
+            0% {
+                filter: drop-shadow(0 0 20px rgba(0, 255, 127, 0.6));
+            }
+            100% {
+                filter: drop-shadow(0 0 30px rgba(0, 255, 127, 0.9));
+            }
+        }
+
         @keyframes iconGlow {
             0% {
                 filter: 
@@ -139,81 +211,8 @@
                     hue-rotate(86deg) 
                     brightness(118%) 
                     contrast(119%)
-                    drop-shadow(0 0 15px rgba(0, 255, 127, 0.8))
-                    drop-shadow(0 0 25px rgba(0, 255, 127, 0.4));
+                    drop-shadow(0 0 15px rgba(0, 255, 127, 0.8));
             }
-        }
-
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 5;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #00ff7f;
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-            opacity: 0.7;
-            box-shadow: 0 0 4px rgba(0, 255, 127, 0.8);
-        }
-
-        @keyframes subtleTextGlow {
-            0% {
-                text-shadow: 
-                    0 0 2px rgba(0, 255, 127, 0.8),
-                    0 0 4px rgba(0, 255, 127, 0.6),
-                    0 0 6px rgba(0, 255, 127, 0.4),
-                    0 0 8px rgba(0, 255, 127, 0.3);
-            }
-            100% {
-                text-shadow: 
-                    0 0 3px rgba(0, 255, 127, 0.9),
-                    0 0 6px rgba(0, 255, 127, 0.7),
-                    0 0 9px rgba(0, 255, 127, 0.5),
-                    0 0 12px rgba(0, 255, 127, 0.4);
-            }
-        }
-
-        @keyframes alphaGlow {
-            0% {
-                text-shadow: 
-                    0 0 20px rgba(0, 255, 127, 1),
-                    0 0 40px rgba(0, 255, 127, 1),
-                    0 0 60px rgba(0, 255, 127, 1),
-                    0 0 80px rgba(0, 255, 127, 0.9),
-                    0 0 120px rgba(0, 255, 127, 0.8),
-                    0 0 160px rgba(0, 255, 127, 0.6),
-                    0 0 200px rgba(0, 255, 127, 0.4);
-            }
-            100% {
-                text-shadow: 
-                    0 0 30px rgba(0, 255, 127, 1),
-                    0 0 60px rgba(0, 255, 127, 1),
-                    0 0 90px rgba(0, 255, 127, 1),
-                    0 0 120px rgba(0, 255, 127, 1),
-                    0 0 180px rgba(0, 255, 127, 0.9),
-                    0 0 240px rgba(0, 255, 127, 0.7),
-                    0 0 300px rgba(0, 255, 127, 0.5);
-            }
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-
-        .logo-image {
-            height: 60px;
-            filter: drop-shadow(0 0 20px rgba(0, 255, 127, 0.6));
-            animation: logoGlow 2s ease-in-out infinite alternate;
         }
 
         @keyframes float {
@@ -233,16 +232,8 @@
             }
         }
 
-                @keyframes logoGlow {
-            0% {
-                filter: drop-shadow(0 0 20px rgba(0, 255, 127, 0.6));
-            }
-            100% {
-                filter: drop-shadow(0 0 30px rgba(0, 255, 127, 0.9));
-            }
-        }
         @media (max-width: 768px) {
-            .main-text {
+            .tagline {
                 font-size: clamp(1.8rem, 6vw, 3rem);
                 margin-bottom: 2rem;
             }
@@ -258,7 +249,6 @@
             
             .social-links {
                 gap: 20px;
-                margin-top: 2rem;
             }
         }
     </style>
@@ -273,10 +263,10 @@
     <div class="particles" id="particles"></div>
     
     <div class="main-content">
-        <div class="text-container">
-            <div class="regular-text">this coin is</div>
-            <div class="alpha-word">alpha</div>
+        <div class="tagline">
+            <span class="dim-text">this coin is </span><span class="glow-text">alpha</span>
         </div>
+        
         <div class="logo-container">
             <img src="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/6883fc4f2dfb0d390f013c23_alpha%20logo.png" alt="AlphaCoin Logo" class="logo-image">
         </div>
