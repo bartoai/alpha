@@ -108,16 +108,44 @@
         @keyframes textGlow {
             0% {
                 text-shadow: 
-                    0 0 10px rgba(0, 255, 127, 0.8),
-                    0 0 20px rgba(0, 255, 127, 0.6),
-                    0 0 30px rgba(0, 255, 127, 0.4);
+                    0 0 5px rgba(0, 255, 127, 1),
+                    0 0 10px rgba(0, 255, 127, 1),
+                    0 0 15px rgba(0, 255, 127, 1),
+                    0 0 20px rgba(0, 255, 127, 0.8),
+                    0 0 35px rgba(0, 255, 127, 0.6),
+                    0 0 40px rgba(0, 255, 127, 0.4);
             }
             100% {
                 text-shadow: 
-                    0 0 20px rgba(0, 255, 127, 1),
-                    0 0 30px rgba(0, 255, 127, 0.8),
-                    0 0 40px rgba(0, 255, 127, 0.6),
-                    0 0 50px rgba(0, 255, 127, 0.4);
+                    0 0 8px rgba(0, 255, 127, 1),
+                    0 0 16px rgba(0, 255, 127, 1),
+                    0 0 24px rgba(0, 255, 127, 1),
+                    0 0 32px rgba(0, 255, 127, 0.9),
+                    0 0 48px rgba(0, 255, 127, 0.7),
+                    0 0 64px rgba(0, 255, 127, 0.5);
+            }
+        }
+
+        @keyframes alphaGlow {
+            0% {
+                text-shadow: 
+                    0 0 8px rgba(0, 255, 127, 1),
+                    0 0 16px rgba(0, 255, 127, 1),
+                    0 0 24px rgba(0, 255, 127, 1),
+                    0 0 32px rgba(0, 255, 127, 0.9),
+                    0 0 48px rgba(0, 255, 127, 0.7),
+                    0 0 64px rgba(0, 255, 127, 0.5),
+                    0 0 80px rgba(0, 255, 127, 0.3);
+            }
+            100% {
+                text-shadow: 
+                    0 0 12px rgba(0, 255, 127, 1),
+                    0 0 24px rgba(0, 255, 127, 1),
+                    0 0 36px rgba(0, 255, 127, 1),
+                    0 0 48px rgba(0, 255, 127, 0.9),
+                    0 0 72px rgba(0, 255, 127, 0.8),
+                    0 0 96px rgba(0, 255, 127, 0.6),
+                    0 0 120px rgba(0, 255, 127, 0.4);
             }
         }
 
@@ -175,7 +203,7 @@
     <div class="particles" id="particles"></div>
     
     <div class="main-content">
-        <h1 class="main-text">this coin is alpha</h1>
+        <h1 class="main-text">this coin is <span class="alpha-word">alpha</span></h1>
         <div class="logo-container">
             <img src="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/6883fc4f2dfb0d390f013c23_alpha%20logo.png" alt="AlphaCoin Logo" class="logo-image">
         </div>
