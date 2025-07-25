@@ -7,9 +7,9 @@
     <style>
         @font-face {
             font-family: 'TRYVesterbro';
-            src: url('https://github.com/bartoai/alpha/raw/main/TRYVesterbro-Medium.woff2') format('woff2'),
-                 url('https://github.com/bartoai/alpha/raw/main/TRYVesterbro-Medium.woff') format('woff'),
-                 url('https://github.com/bartoai/alpha/raw/main/TRYVesterbro-Medium.ttf') format('truetype');
+            src: url('https://cdn.jsdelivr.net/gh/bartoai/alpha@main/TRYVesterbro-Medium.woff2') format('woff2'),
+                 url('https://cdn.jsdelivr.net/gh/bartoai/alpha@main/TRYVesterbro-Medium.woff') format('woff'),
+                 url('https://cdn.jsdelivr.net/gh/bartoai/alpha@main/TRYVesterbro-Medium.ttf') format('truetype');
             font-weight: 500;
             font-style: normal;
             font-display: swap;
@@ -79,33 +79,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
             margin-top: 2rem;
         }
 
-        .alpha-symbol {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #00ff7f, #00cc66);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: bold;
-            color: #000;
-            box-shadow: 
-                0 0 20px rgba(0, 255, 127, 0.6),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .brand-name {
-            font-size: 2rem;
-            font-weight: 600;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
-            letter-spacing: 1px;
+        .logo-image {
+            height: 60px;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 127, 0.6));
+            animation: logoGlow 2s ease-in-out infinite alternate;
         }
 
         .particles {
@@ -143,18 +123,12 @@
             }
         }
 
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 
-                    0 0 20px rgba(0, 255, 127, 0.6),
-                    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        @keyframes logoGlow {
+            0% {
+                filter: drop-shadow(0 0 20px rgba(0, 255, 127, 0.6));
             }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 
-                    0 0 30px rgba(0, 255, 127, 0.8),
-                    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+            100% {
+                filter: drop-shadow(0 0 30px rgba(0, 255, 127, 0.9));
             }
         }
 
@@ -205,8 +179,7 @@
     <div class="main-content">
         <h1 class="main-text">this coin is alpha</h1>
         <div class="logo-container">
-            <div class="alpha-symbol">α</div>
-            <div class="brand-name">AlphaCoin</div>
+            <img src="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/6883fc4f2dfb0d390f013c23_alpha%20logo.png" alt="AlphaCoin Logo" class="logo-image">
         </div>
     </div>
 
