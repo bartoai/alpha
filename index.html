@@ -56,7 +56,7 @@
 
         .loading-logo {
             height: 60px;
-            filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
+            filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.6));
             animation: logoFadeIn 1.5s ease-out;
         }
 
@@ -105,8 +105,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(1, 255, 63, 0.002) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(1, 255, 63, 0.002) 1px, transparent 1px);
+                linear-gradient(rgba(0, 255, 65, 0.002) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.002) 1px, transparent 1px);
             background-size: 50px 50px;
             pointer-events: none;
             z-index: 1;
@@ -123,8 +123,8 @@
                 0deg,
                 transparent 0px,
                 transparent 2px,
-                rgba(1, 255, 63, 0.001) 2px,
-                rgba(1, 255, 63, 0.001) 4px
+                rgba(0, 255, 65, 0.001) 2px,
+                rgba(0, 255, 65, 0.001) 4px
             );
             pointer-events: none;
             z-index: 1;
@@ -152,6 +152,35 @@
 
         .tagline:hover {
             letter-spacing: 3px;
+        }
+
+        /* Typewriter effect styles */
+        .typewriter-container {
+            display: inline-block;
+            position: relative;
+        }
+
+        .typewriter-text {
+            opacity: 0;
+            display: inline-block;
+        }
+
+        .typewriter-text.typing {
+            opacity: 1;
+        }
+
+        .typewriter-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background: #00ff41;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+            vertical-align: baseline;
+        }
+
+        .typewriter-cursor.hidden {
+            opacity: 0;
         }
 
         .dim-text {
@@ -220,13 +249,13 @@
 
         .logo-image {
             height: 45px;
-            filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
+            filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.6));
             animation: logoBreathe 3.5s ease-in-out infinite alternate;
             transition: all 0.3s ease;
         }
 
         .logo-image:hover {
-            filter: drop-shadow(0 0 30px rgba(1, 255, 63, 0.8));
+            filter: drop-shadow(0 0 30px rgba(0, 255, 65, 0.8));
         }
 
         .social-links {
@@ -260,7 +289,7 @@
                 hue-rotate(79deg) 
                 brightness(108%) 
                 contrast(101%)
-                drop-shadow(0 0 10px rgba(1, 255, 63, 0.6));
+                drop-shadow(0 0 10px rgba(0, 255, 65, 0.6));
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
             animation: iconGlow 3s ease-in-out infinite alternate;
@@ -276,8 +305,8 @@
                 hue-rotate(79deg) 
                 brightness(108%) 
                 contrast(101%)
-                drop-shadow(0 0 25px rgba(1, 255, 63, 1))
-                drop-shadow(0 0 40px rgba(1, 255, 63, 0.8));
+                drop-shadow(0 0 25px rgba(0, 255, 65, 1))
+                drop-shadow(0 0 40px rgba(0, 255, 65, 0.8));
             transform: scale(1.15) rotate(5deg);
         }
 
@@ -294,11 +323,11 @@
             position: absolute;
             width: 2px;
             height: 2px;
-            background: #01ff3f;
+            background: #00ff41;
             border-radius: 50%;
             animation: float 15s infinite linear;
             opacity: 0.7;
-            box-shadow: 0 0 4px rgba(1, 255, 63, 0.8);
+            box-shadow: 0 0 4px rgba(0, 255, 65, 0.8);
         }
 
         /* Subtle parallax dots */
@@ -316,7 +345,7 @@
             position: absolute;
             width: 1px;
             height: 1px;
-            background: rgba(1, 255, 63, 0.1);
+            background: rgba(0, 255, 65, 0.1);
             border-radius: 50%;
             animation: dotTwinkle 4s ease-in-out infinite;
         }
@@ -351,6 +380,15 @@
             100% {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
             }
         }
 
@@ -439,11 +477,11 @@
 
         @keyframes logoBreathe {
             0% {
-                filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
+                filter: drop-shadow(0 0 20px rgba(0, 255, 65, 0.6));
                 transform: scale(1);
             }
             100% {
-                filter: drop-shadow(0 0 35px rgba(1, 255, 63, 0.8));
+                filter: drop-shadow(0 0 35px rgba(0, 255, 65, 0.8));
                 transform: scale(1.02);
             }
         }
@@ -459,7 +497,7 @@
                     hue-rotate(79deg) 
                     brightness(108%) 
                     contrast(101%)
-                    drop-shadow(0 0 10px rgba(1, 255, 63, 0.6));
+                    drop-shadow(0 0 10px rgba(0, 255, 65, 0.6));
             }
             100% {
                 filter: 
@@ -471,7 +509,7 @@
                     hue-rotate(79deg) 
                     brightness(108%) 
                     contrast(101%)
-                    drop-shadow(0 0 15px rgba(1, 255, 63, 0.8));
+                    drop-shadow(0 0 15px rgba(0, 255, 65, 0.8));
             }
         }
 
@@ -537,7 +575,11 @@
     
     <div class="main-content">
         <div class="tagline">
-            <span class="dim-text">this coin is </span><span class="glow-text">alpha</span>
+            <div class="typewriter-container">
+                <span class="typewriter-text dim-text" id="typewriter1"></span>
+                <span class="typewriter-text glow-text" id="typewriter2"></span>
+                <span class="typewriter-cursor" id="cursor"></span>
+            </div>
         </div>
         
         <div class="logo-container">
@@ -619,6 +661,46 @@
             }
         }
 
+        // Typewriter effect
+        function typewriterEffect() {
+            const text1 = "this coin is ";
+            const text2 = "alpha";
+            const element1 = document.getElementById('typewriter1');
+            const element2 = document.getElementById('typewriter2');
+            const cursor = document.getElementById('cursor');
+            
+            let i = 0;
+            let j = 0;
+            let isFirstComplete = false;
+            
+            function typeChar() {
+                if (!isFirstComplete && i < text1.length) {
+                    element1.textContent += text1.charAt(i);
+                    element1.classList.add('typing');
+                    i++;
+                    setTimeout(typeChar, 100); // Typing speed
+                } else if (!isFirstComplete) {
+                    isFirstComplete = true;
+                    setTimeout(typeChar, 200); // Pause between phrases
+                } else if (j < text2.length) {
+                    if (j === 0) {
+                        element2.classList.add('typing');
+                    }
+                    element2.textContent += text2.charAt(j);
+                    j++;
+                    setTimeout(typeChar, 120); // Slightly slower for "alpha"
+                } else {
+                    // Typing complete, hide cursor after a delay
+                    setTimeout(() => {
+                        cursor.classList.add('hidden');
+                    }, 1000);
+                }
+            }
+            
+            // Start typing after main content fades in
+            setTimeout(typeChar, 3200); // Start after main content animation
+        }
+
         // Loading screen functionality
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -630,6 +712,7 @@
                     startParticles();
                     createParallaxDots();
                     setupSoundEffects();
+                    typewriterEffect(); // Start typewriter effect
                 }, 1000);
             }, 1500); // 1.5 second loading time
         });
