@@ -1,4 +1,46 @@
-<!DOCTYPE html>
+@keyframes logoSpinLoad {
+            0% {
+                transform: scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
+            }
+            50% {
+                transform: scale(1.05) rotate(180deg);
+                filter: drop-shadow(0 0 30px rgba(1, 255, 63, 0.8));
+            }
+            100% {
+                transform: scale(1) rotate(360deg);
+                filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
+            }
+        }
+
+        @keyframes loadingPulse {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes progressLoad {
+            0% {
+                width: 0%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes fadeInContent {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -66,25 +108,34 @@
         }
 
         .dim-text {
-            color: #00ff7f;
-            opacity: 0.6;
+            color: #01ff3f;
+            opacity: 1;
             text-shadow: 
-                0 0 5px rgba(0, 255, 127, 0.6),
-                0 0 10px rgba(0, 255, 127, 0.4),
-                0 0 15px rgba(0, 255, 127, 0.2);
+                0 0 5px rgba(1, 255, 63, 0.6),
+                0 0 10px rgba(1, 255, 63, 0.4),
+                0 0 15px rgba(1, 255, 63, 0.2);
             animation: subtleBreathe 4s ease-in-out infinite alternate;
         }
 
         .glow-text {
-            color: #00ff7f;
+            color: #01ff3f;
             text-shadow: 
-                0 0 20px rgba(0, 255, 127, 1),
-                0 0 40px rgba(0, 255, 127, 1),
-                0 0 60px rgba(0, 255, 127, 1),
-                0 0 80px rgba(0, 255, 127, 0.9),
-                0 0 120px rgba(0, 255, 127, 0.8),
-                0 0 160px rgba(0, 255, 127, 0.6);
-            animation: alphaGlow 2.5s ease-in-out infinite alternate;
+                0 0 1px rgba(1, 255, 63, 0.8),
+                0 0 2px rgba(1, 255, 63, 0.7),
+                0 0 4px rgba(1, 255, 63, 0.6),
+                0 0 6px rgba(1, 255, 63, 0.5),
+                0 0 8px rgba(1, 255, 63, 0.4),
+                0 0 10px rgba(1, 255, 63, 0.35),
+                0 0 12px rgba(1, 255, 63, 0.3),
+                0 0 14px rgba(1, 255, 63, 0.25),
+                0 0 16px rgba(1, 255, 63, 0.2),
+                0 0 18px rgba(1, 255, 63, 0.15),
+                0 0 20px rgba(1, 255, 63, 0.1),
+                0 0 22px rgba(1, 255, 63, 0.08),
+                0 0 24px rgba(1, 255, 63, 0.06),
+                0 0 26px rgba(1, 255, 63, 0.04),
+                0 0 28px rgba(1, 255, 63, 0.02);
+            animation: alphaGlow 5s ease-in-out infinite alternate;
         }
 
         .logo-container {
@@ -158,8 +209,6 @@
             opacity: 0.7;
             box-shadow: 0 0 4px rgba(1, 255, 63, 0.8);
         }
-
-
 
         @keyframes alphaGlow {
             0% {
@@ -297,6 +346,15 @@
     </style>
 </head>
 <body>
+    <!-- Loading screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <img src="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/6883fc4f2dfb0d390f013c23_alpha%20logo.png" alt="AlphaCoin Logo" class="loading-logo">
+        <div class="loading-text">ALPHA</div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+
     <div class="glow-background"></div>
     <div class="atmosphere"></div>
     <div class="particles" id="particles"></div>
