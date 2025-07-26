@@ -1,46 +1,4 @@
-@keyframes logoSpinLoad {
-            0% {
-                transform: scale(1) rotate(0deg);
-                filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
-            }
-            50% {
-                transform: scale(1.05) rotate(180deg);
-                filter: drop-shadow(0 0 30px rgba(1, 255, 63, 0.8));
-            }
-            100% {
-                transform: scale(1) rotate(360deg);
-                filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
-            }
-        }
-
-        @keyframes loadingPulse {
-            0% {
-                opacity: 0.5;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes progressLoad {
-            0% {
-                width: 0%;
-            }
-            100% {
-                width: 100%;
-            }
-        }
-
-        @keyframes fadeInContent {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -75,6 +33,71 @@
             position: relative;
         }
 
+        /* Loading screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-logo {
+            height: 60px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
+            animation: logoSpinLoad 2s ease-in-out infinite;
+        }
+
+        .loading-text {
+            color: #01ff3f;
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            opacity: 0.8;
+            animation: loadingPulse 1.5s ease-in-out infinite alternate;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 2px;
+            background: rgba(1, 255, 63, 0.2);
+            margin-top: 2rem;
+            border-radius: 1px;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(1, 255, 63, 0.4) 0%, 
+                rgba(1, 255, 63, 1) 50%, 
+                rgba(1, 255, 63, 0.4) 100%);
+            width: 0%;
+            animation: progressLoad 3s ease-out forwards;
+        }
+
+        /* Main content hidden initially */
+        .main-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInContent 1s ease-out 3.2s forwards;
+        }
+
         /* Pure black background with minimal gradient */
         .glow-background {
             position: fixed;
@@ -91,12 +114,6 @@
         /* Remove atmospheric layer */
         .atmosphere {
             display: none;
-        }
-
-        .main-content {
-            text-align: center;
-            z-index: 10;
-            position: relative;
         }
 
         .tagline {
@@ -208,6 +225,50 @@
             animation: float 15s infinite linear;
             opacity: 0.7;
             box-shadow: 0 0 4px rgba(1, 255, 63, 0.8);
+        }
+
+        @keyframes logoSpinLoad {
+            0% {
+                transform: scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
+            }
+            50% {
+                transform: scale(1.05) rotate(180deg);
+                filter: drop-shadow(0 0 30px rgba(1, 255, 63, 0.8));
+            }
+            100% {
+                transform: scale(1) rotate(360deg);
+                filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
+            }
+        }
+
+        @keyframes loadingPulse {
+            0% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes progressLoad {
+            0% {
+                width: 0%;
+            }
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes fadeInContent {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes alphaGlow {
@@ -382,6 +443,29 @@
     </div>
 
     <script>
+        // Loading screen functionality
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.classList.add('hidden');
+                
+                // Start particle creation after loading
+                setTimeout(() => {
+                    startParticles();
+                }, 800);
+            }, 3000); // 3 second loading time
+        });
+
+        function startParticles() {
+            // Create particles periodically
+            setInterval(createParticle, 300);
+            
+            // Create initial particles
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createParticle, i * 100);
+            }
+        }
+
         // Create floating particles
         function createParticle() {
             const particle = document.createElement('div');
@@ -400,14 +484,6 @@
                     particle.parentNode.removeChild(particle);
                 }
             }, 25000);
-        }
-
-        // Create particles periodically
-        setInterval(createParticle, 300);
-        
-        // Create initial particles
-        for (let i = 0; i < 20; i++) {
-            setTimeout(createParticle, i * 100);
         }
     </script>
 </body>
