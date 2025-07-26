@@ -227,40 +227,29 @@
             box-shadow: 0 0 4px rgba(1, 255, 63, 0.8);
         }
 
-        @keyframes logoSpinLoad {
+        @keyframes logoFadeIn {
             0% {
-                transform: scale(1) rotate(0deg);
-                filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
-            }
-            50% {
-                transform: scale(1.05) rotate(180deg);
-                filter: drop-shadow(0 0 30px rgba(1, 255, 63, 0.8));
-            }
-            100% {
-                transform: scale(1) rotate(360deg);
-                filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
-            }
-        }
-
-        @keyframes loadingPulse {
-            0% {
-                opacity: 0.5;
+                opacity: 0;
+                transform: scale(0.8);
             }
             100% {
                 opacity: 1;
-            }
-        }
-
-        @keyframes progressLoad {
-            0% {
-                width: 0%;
-            }
-            100% {
-                width: 100%;
+                transform: scale(1);
             }
         }
 
         @keyframes fadeInContent {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInSocials {
             0% {
                 opacity: 0;
                 transform: translateY(20px);
@@ -410,10 +399,6 @@
     <!-- Loading screen -->
     <div class="loading-screen" id="loadingScreen">
         <img src="https://cdn.prod.website-files.com/6740d85c4e3daeef29a89470/6883fc4f2dfb0d390f013c23_alpha%20logo.png" alt="AlphaCoin Logo" class="loading-logo">
-        <div class="loading-text">ALPHA</div>
-        <div class="loading-bar">
-            <div class="loading-progress"></div>
-        </div>
     </div>
 
     <div class="glow-background"></div>
@@ -452,8 +437,8 @@
                 // Start particle creation after loading
                 setTimeout(() => {
                     startParticles();
-                }, 800);
-            }, 3000); // 3 second loading time
+                }, 1000);
+            }, 1500); // 1.5 second loading time
         });
 
         function startParticles() {
