@@ -33,25 +33,6 @@
             position: relative;
         }
 
-        /* Subtle scanlines for tech feel */
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent 0px,
-                transparent 2px,
-                rgba(1, 255, 63, 0.003) 2px,
-                rgba(1, 255, 63, 0.003) 4px
-            );
-            pointer-events: none;
-            z-index: 1;
-            animation: scanlineMove 8s linear infinite;
-        }
-
         /* Loading screen */
         .loading-screen {
             position: fixed;
@@ -65,36 +46,7 @@
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-                @keyframes scanlineMove {
-            0% {
-                transform: translateY(-100%);
-            }
-            100% {
-                transform: translateY(100vh);
-            }
-        }
-
-        @keyframes dotTwinkle {
-            0%, 100% {
-                opacity: 0.1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.3;
-                transform: scale(1.2);
-            }
-        }
-
-        @keyframes gridPulse {
-            0%, 100% {
-                opacity: 0.3;
-            }
-            50% {
-                opacity: 0.1;
-            }
+            transition: opacity 1s ease, visibility 1s ease;
         }
 
         .loading-screen.hidden {
@@ -104,46 +56,8 @@
 
         .loading-logo {
             height: 60px;
-            margin-bottom: 2rem;
             filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
-            animation: logoSpinLoad 2s ease-in-out infinite;
-        }
-
-        .loading-text {
-            color: #01ff3f;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            opacity: 0.8;
-            animation: loadingPulse 1.5s ease-in-out infinite alternate;
-        }
-
-        .loading-bar {
-            width: 200px;
-            height: 2px;
-            background: rgba(1, 255, 63, 0.2);
-            margin-top: 2rem;
-            border-radius: 1px;
-            overflow: hidden;
-        }
-
-        .loading-progress {
-            height: 100%;
-            background: linear-gradient(90deg, 
-                rgba(1, 255, 63, 0.4) 0%, 
-                rgba(1, 255, 63, 1) 50%, 
-                rgba(1, 255, 63, 0.4) 100%);
-            width: 0%;
-            animation: progressLoad 3s ease-out forwards;
-        }
-
-        /* Main content hidden initially */
-        .main-content {
-            text-align: center;
-            z-index: 10;
-            position: relative;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInContent 1s ease-out 3.2s forwards;
+            animation: logoFadeIn 1.5s ease-out;
         }
 
         /* Pure black background with minimal gradient */
@@ -153,15 +67,78 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
-                linear-gradient(135deg, rgba(5, 5, 5, 1) 0%, rgba(0, 0, 0, 1) 50%, rgba(5, 5, 5, 1) 100%),
-                #000000;
+            background: #000000;
+            z-index: -3;
+        }
+
+        /* Video background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: -2;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
         }
 
         /* Remove atmospheric layer */
         .atmosphere {
             display: none;
+        }
+
+        /* Reduce grid and scanline intensity over video */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(1, 255, 63, 0.002) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(1, 255, 63, 0.002) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 1;
+            animation: gridPulse 10s ease-in-out infinite;
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 2px,
+                rgba(1, 255, 63, 0.001) 2px,
+                rgba(1, 255, 63, 0.001) 4px
+            );
+            pointer-events: none;
+            z-index: 1;
+            animation: scanlineMove 8s linear infinite;
+        }
+
+        /* Main content and social links fade in sequence */
+        .main-content {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInContent 1s ease-out 2s forwards;
         }
 
         .tagline {
@@ -258,6 +235,18 @@
             justify-content: center;
             align-items: center;
             gap: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSocials 1s ease-out 3s forwards;
+        }
+
+        .social-links a {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: block;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
         }
 
         .social-icon {
@@ -273,7 +262,7 @@
                 brightness(108%) 
                 contrast(101%)
                 drop-shadow(0 0 10px rgba(1, 255, 63, 0.6));
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
             animation: iconGlow 3s ease-in-out infinite alternate;
         }
@@ -288,9 +277,9 @@
                 hue-rotate(79deg) 
                 brightness(108%) 
                 contrast(101%)
-                drop-shadow(0 0 20px rgba(1, 255, 63, 1))
-                drop-shadow(0 0 30px rgba(1, 255, 63, 0.8));
-            transform: scale(1.1);
+                drop-shadow(0 0 25px rgba(1, 255, 63, 1))
+                drop-shadow(0 0 40px rgba(1, 255, 63, 0.8));
+            transform: scale(1.15) rotate(5deg);
         }
 
         /* Professional motion details */
@@ -333,22 +322,6 @@
             animation: dotTwinkle 4s ease-in-out infinite;
         }
 
-        /* Grid overlay for tech feel */
-        .grid-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(1, 255, 63, 0.005) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(1, 255, 63, 0.005) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: 1;
-            animation: gridPulse 10s ease-in-out infinite;
-        }
-
         @keyframes logoFadeIn {
             0% {
                 opacity: 0;
@@ -379,6 +352,35 @@
             100% {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+
+        @keyframes scanlineMove {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        @keyframes dotTwinkle {
+            0%, 100% {
+                opacity: 0.1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes gridPulse {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.1;
             }
         }
 
@@ -524,10 +526,16 @@
     </div>
 
     <div class="glow-background"></div>
+    
+    <video class="video-background" autoplay muted loop playsinline>
+        <source src="https://res.cloudinary.com/dk4bbapud/video/upload/v1753533985/gen_e5p6zg.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <div class="video-overlay"></div>
     <div class="grid-overlay"></div>
     <div class="scanlines"></div>
     <div class="parallax-dots" id="parallaxDots"></div>
-    <div class="atmosphere"></div>
     <div class="particles" id="particles"></div>
     
     <div class="main-content">
@@ -621,6 +629,14 @@
                 const x = (mouseX - 0.5) * speed;
                 const y = (mouseY - 0.5) * speed;
                 element.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        // Ensure video plays on mobile
+        const video = document.querySelector('.video-background');
+        video.addEventListener('loadedmetadata', function() {
+            video.play().catch(function(error) {
+                console.log('Video autoplay failed:', error);
             });
         });
     </script>
