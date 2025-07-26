@@ -170,17 +170,7 @@
         }
 
         .typewriter-cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1em;
-            background: #00ff41;
-            margin-left: 2px;
-            animation: blink 1s infinite;
-            vertical-align: baseline;
-        }
-
-        .typewriter-cursor.hidden {
-            opacity: 0;
+            display: none;
         }
 
         .dim-text {
@@ -578,7 +568,6 @@
             <div class="typewriter-container">
                 <span class="typewriter-text dim-text" id="typewriter1"></span>
                 <span class="typewriter-text glow-text" id="typewriter2"></span>
-                <span class="typewriter-cursor" id="cursor"></span>
             </div>
         </div>
         
@@ -667,7 +656,6 @@
             const text2 = "alpha";
             const element1 = document.getElementById('typewriter1');
             const element2 = document.getElementById('typewriter2');
-            const cursor = document.getElementById('cursor');
             
             let i = 0;
             let j = 0;
@@ -678,27 +666,22 @@
                     element1.textContent += text1.charAt(i);
                     element1.classList.add('typing');
                     i++;
-                    setTimeout(typeChar, 100); // Typing speed
+                    setTimeout(typeChar, 100); // Back to original typing speed
                 } else if (!isFirstComplete) {
                     isFirstComplete = true;
-                    setTimeout(typeChar, 200); // Pause between phrases
+                    setTimeout(typeChar, 200); // Original pause between phrases
                 } else if (j < text2.length) {
                     if (j === 0) {
                         element2.classList.add('typing');
                     }
                     element2.textContent += text2.charAt(j);
                     j++;
-                    setTimeout(typeChar, 120); // Slightly slower for "alpha"
-                } else {
-                    // Typing complete, hide cursor after a delay
-                    setTimeout(() => {
-                        cursor.classList.add('hidden');
-                    }, 1000);
+                    setTimeout(typeChar, 120); // Original speed for "alpha"
                 }
             }
             
-            // Start typing after main content fades in
-            setTimeout(typeChar, 3200); // Start after main content animation
+            // Start typing much sooner
+            setTimeout(typeChar, 500); // Start very early, right after loading screen starts fading
         }
 
         // Loading screen functionality
