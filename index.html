@@ -1,31 +1,4 @@
-@keyframes scanlineMove {
-            0% {
-                transform: translateY(-100%);
-            }
-            100% {
-                transform: translateY(100vh);
-            }
-        }
-
-        @keyframes dotTwinkle {
-            0%, 100% {
-                opacity: 0.1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.3;
-                transform: scale(1.2);
-            }
-        }
-
-        @keyframes gridPulse {
-            0%, 100% {
-                opacity: 0.3;
-            }
-            50% {
-                opacity: 0.1;
-            }
-        }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -93,6 +66,35 @@
             align-items: center;
             z-index: 10000;
             transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+                @keyframes scanlineMove {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        @keyframes dotTwinkle {
+            0%, 100% {
+                opacity: 0.1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes gridPulse {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.1;
+            }
         }
 
         .loading-screen.hidden {
