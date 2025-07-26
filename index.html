@@ -1,4 +1,31 @@
-<!DOCTYPE html>
+@keyframes scanlineMove {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        @keyframes dotTwinkle {
+            0%, 100% {
+                opacity: 0.1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.3;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes gridPulse {
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.1;
+            }
+        }<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,6 +58,25 @@
             align-items: center;
             overflow: hidden;
             position: relative;
+        }
+
+        /* Subtle scanlines for tech feel */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 2px,
+                rgba(1, 255, 63, 0.003) 2px,
+                rgba(1, 255, 63, 0.003) 4px
+            );
+            pointer-events: none;
+            z-index: 1;
+            animation: scanlineMove 8s linear infinite;
         }
 
         /* Loading screen */
@@ -122,6 +168,11 @@
             letter-spacing: 2px;
             margin-bottom: 3rem;
             line-height: 1.2;
+            transition: all 0.3s ease;
+        }
+
+        .tagline:hover {
+            letter-spacing: 3px;
         }
 
         .dim-text {
@@ -132,6 +183,11 @@
                 0 0 10px rgba(1, 255, 63, 0.4),
                 0 0 15px rgba(1, 255, 63, 0.2);
             animation: subtleBreathe 4s ease-in-out infinite alternate;
+            transition: all 0.3s ease;
+        }
+
+        .dim-text:hover {
+            opacity: 0.8;
         }
 
         .glow-text {
@@ -153,6 +209,23 @@
                 0 0 26px rgba(1, 255, 63, 0.04),
                 0 0 28px rgba(1, 255, 63, 0.02);
             animation: alphaGlow 5s ease-in-out infinite alternate;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .glow-text:hover {
+            text-shadow: 
+                0 0 2px rgba(1, 255, 63, 0.9),
+                0 0 4px rgba(1, 255, 63, 0.8),
+                0 0 8px rgba(1, 255, 63, 0.7),
+                0 0 12px rgba(1, 255, 63, 0.6),
+                0 0 16px rgba(1, 255, 63, 0.5),
+                0 0 20px rgba(1, 255, 63, 0.4),
+                0 0 24px rgba(1, 255, 63, 0.3),
+                0 0 28px rgba(1, 255, 63, 0.25),
+                0 0 32px rgba(1, 255, 63, 0.2),
+                0 0 36px rgba(1, 255, 63, 0.15),
+                0 0 40px rgba(1, 255, 63, 0.1);
         }
 
         .logo-container {
@@ -160,12 +233,22 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 3rem;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
         }
 
         .logo-image {
             height: 45px;
             filter: drop-shadow(0 0 20px rgba(1, 255, 63, 0.6));
             animation: logoBreathe 3.5s ease-in-out infinite alternate;
+            transition: all 0.3s ease;
+        }
+
+        .logo-image:hover {
+            filter: drop-shadow(0 0 30px rgba(1, 255, 63, 0.8));
         }
 
         .social-links {
@@ -208,6 +291,7 @@
             transform: scale(1.1);
         }
 
+        /* Professional motion details */
         .particles {
             position: absolute;
             width: 100%;
@@ -225,6 +309,42 @@
             animation: float 15s infinite linear;
             opacity: 0.7;
             box-shadow: 0 0 4px rgba(1, 255, 63, 0.8);
+        }
+
+        /* Subtle parallax dots */
+        .parallax-dots {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .parallax-dot {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background: rgba(1, 255, 63, 0.1);
+            border-radius: 50%;
+            animation: dotTwinkle 4s ease-in-out infinite;
+        }
+
+        /* Grid overlay for tech feel */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(1, 255, 63, 0.005) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(1, 255, 63, 0.005) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 1;
+            animation: gridPulse 10s ease-in-out infinite;
         }
 
         @keyframes logoFadeIn {
@@ -402,6 +522,9 @@
     </div>
 
     <div class="glow-background"></div>
+    <div class="grid-overlay"></div>
+    <div class="scanlines"></div>
+    <div class="parallax-dots" id="parallaxDots"></div>
     <div class="atmosphere"></div>
     <div class="particles" id="particles"></div>
     
@@ -437,6 +560,7 @@
                 // Start particle creation after loading
                 setTimeout(() => {
                     startParticles();
+                    createParallaxDots();
                 }, 1000);
             }, 1500); // 1.5 second loading time
         });
@@ -470,6 +594,33 @@
                 }
             }, 25000);
         }
+
+        // Create parallax dots for depth
+        function createParallaxDots() {
+            const container = document.getElementById('parallaxDots');
+            for (let i = 0; i < 50; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'parallax-dot';
+                dot.style.left = Math.random() * 100 + '%';
+                dot.style.top = Math.random() * 100 + '%';
+                dot.style.animationDelay = Math.random() * 4 + 's';
+                container.appendChild(dot);
+            }
+        }
+
+        // Subtle mouse parallax effect
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            const parallaxElements = document.querySelectorAll('.parallax-dot');
+            parallaxElements.forEach((element, index) => {
+                const speed = (index % 3 + 1) * 0.5;
+                const x = (mouseX - 0.5) * speed;
+                const y = (mouseY - 0.5) * speed;
+                element.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
     </script>
 </body>
 </html>
